@@ -1,0 +1,250 @@
+.contact-wrapper {
+  width: 100%;
+  background-color: #f9f8f3;
+}
+
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.contact-left {
+  flex: 1;
+  min-width: 300px;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.contact-right {
+  flex: 1;
+  min-width: 300px;
+  animation: slideInRight 0.8s ease-out;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-family: 'DM Sans', sans-serif;
+  color: #2B7A37;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.email-section {
+  margin: 2rem 0;
+}
+
+.email-section h3 {
+  color: #2B7A37;
+  margin-bottom: 0.5rem;
+}
+
+.email {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.calendly-btn {
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid #2B7A37;
+  border-radius: 25px;
+  background: transparent;
+  color: #2B7A37;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.calendly-btn:hover {
+  background: #2B7A37;
+  color: white;
+}
+
+.contact-form {
+  background: white;
+  font-family: 'DM Sans', sans-serif;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8E9196;
+  width: 18px;
+  height: 18px;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.custom-input:focus {
+  outline: none;
+  border-color: #9b87f5;
+}
+
+.custom-input::placeholder {
+  color: #8E9196;
+}
+
+input {
+  flex: 1;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2B7A37;
+}
+
+.options-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.option-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #2B7A37;
+  border-radius: 25px;
+  background: transparent;
+  color: #2B7A37;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option-btn.selected {
+  background: #2B7A37;
+  color: white;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #2B7A37;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #236c2f;
+}
+
+.video-section {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-heading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: 'DM Sans', sans-serif;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  color: white;
+  font-size: 4rem;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.video-section video {
+  width: 100%;
+  /* margin-top: 24px; */
+  border-radius: 40px;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .video-heading {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+}
+
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 1rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .email {
+    font-size: 2.5rem;
+  }
+
+  .input-wrapper {
+    margin-bottom: 1rem;
+  }
+}

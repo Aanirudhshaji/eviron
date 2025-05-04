@@ -1,0 +1,125 @@
+.tech-section {
+    display: flex;
+    margin-top: -50px;
+    flex-wrap: wrap;
+    background-color: #f8f9f3;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5rem 7.7rem;
+  }
+  
+  .text-container {
+    flex: 1;
+    max-width: 50%;
+    margin-left: 2rem;
+  }
+  
+  .tech-title {
+    font-family: 'Gloock', serif;
+    letter-spacing: 5px;
+    font-size: 4rem;
+    color: #2a672a;
+    margin: 0;
+  }
+  
+  .tech-highlight {
+    color: #b9d2b8;
+  }
+  
+  .tech-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.75rem;
+    color: #2a672a;
+    margin: 1rem 0;
+  }
+  
+  .hidden-left {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  
+  .slide-in-left {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.8s ease-out;
+  }
+  
+  .tech-button {
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #2a672a;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 2rem;
+  }
+  
+  .tech-button:hover {
+    background-color: #3b5a3c;
+  }
+  
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 50%;
+    background-image: url('../assets/4.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: -45px;
+    height: 375px;
+    min-width: 300px;
+    min-height: 250px;
+  }
+  
+  /* ---- Mobile Responsive Fixes ---- */
+  @media (max-width: 768px) {
+    .tech-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 35px;
+      padding: 2rem;
+    }
+  
+    .text-container {
+      max-width: 100%;
+      margin-left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .tech-title {
+      font-size: 2rem;
+      text-align: center;
+    }
+  
+    .tech-subtitle {
+      font-size: 1rem;
+      text-align: center;
+    }
+  
+    .image-container {
+      width: 100%;
+      height: 300px;
+      background-size: contain;
+      background-position: center;
+      margin: 1rem 0;
+      order: 2; /* ✅ Image comes after subtitle */
+    }
+  
+    .tech-button {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+      margin-bottom: 1.5rem;
+      order: 3; /* ✅ Button comes after image */
+    }
+  }
+  

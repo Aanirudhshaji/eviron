@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap');
+
+.work-wrapper {
+  background-color: #f9f8f3;
+  width: 100%;
+}
+
+.work-container {
+  width: 100%;
+  padding-top: 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.work-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.work-title {
+  font-family: 'Gloock', serif;
+  font-size: 17rem;
+  color: #237635;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+}
+
+.work-divider {
+  height: 1px;
+  background-color: #333;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 68px 2rem;
+}
+
+.project-card {
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.project-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image {
+  height: 0;
+  padding-bottom: 66%;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.project-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.category {
+  display: block;
+  font-size: 0.85rem;
+  font-family: 'DM Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .work-title {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-title {
+    font-size: 4rem;
+    margin-top: 35px;
+    text-align: center;
+  }
+}
