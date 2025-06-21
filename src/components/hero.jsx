@@ -21,8 +21,8 @@ const Hero = () => {
         preload="auto"
       >
         <source
-          src="https://res.cloudinary.com/dhbvmc6xe/video/upload/v1746251925/eviron.com_zlyr8j.mp4"
-          type="video/mp4"
+          src="https://res.cloudinary.com/dhbvmc6xe/video/upload/v1746673507/aba49c88-f449-8a2a-93bf-a4f043c77a9c_custom_blmslk.webm"
+          type="video/webm"
         />
         Your browser does not support the video tag.
       </video>

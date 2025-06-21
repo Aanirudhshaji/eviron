@@ -76,7 +76,7 @@ const Footer = () => {
         <div className="footer-icons">
           <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
           <a href="https://www.instagram.com/eviro.n/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-          <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+          <a href="https://www.linkedin.com/company/eviron-in/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
           <a href="https://github.com/yourprofile" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           <a href="https://behance.net/yourprofile" target="_blank" rel="noopener noreferrer"><FaBehance /></a>
           <a href="https://dribbble.com/yourprofile" target="_blank" rel="noopener noreferrer"><FaDribbble /></a>

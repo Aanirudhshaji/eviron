@@ -77,11 +77,11 @@ const About = () => {
           <h2>Meet Eviron</h2>
         </div>
         <div className="section-content">
-          <p>We're a collective of passionate visionaries, crafting powerful health technology to make an impact on the lives of the people using our tools.</p>
+          <p>Driven by innovation and purpose, Eviron is a leading provider of cutting-edge software development and IT solutions designed to help businesses thrive in the digital age.</p>
 
-          <p>Our expert designers and technologists have decades of experience in tech, health, and data. We build tools that solve real problems and make managing health an empowering and intuitive experience.</p>
+          <p>Our team of experienced developers, designers, and technology consultants collaborates to build powerful, user-focused products that solve real-world problems. From intuitive web applications to scalable enterprise systems, we deliver technology that’s smart, reliable, and human-centered.</p>
 
-          <p>We believe that technology that puts people first will make healthcare more human.</p>
+          <p>At Eviron, we believe that great design and intelligent technology can transform how people work, connect, and grow—making every digital experience seamless and impactful.</p>
         </div>
       </section>
 
