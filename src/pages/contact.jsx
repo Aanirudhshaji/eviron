@@ -211,7 +211,7 @@ const Contact = () => {
             {/* ✅ reCAPTCHA here */}
             <div style={{ margin: '20px 0' }}>
               <ReCAPTCHA
-                sitekey="6LeHeWgrAAAAAE7gZ7n4swbprEVydEUOz0Nsxsag" // ⬅️ Replace with your real site key
+                sitekey="6LdnfWgrAAAAAJe4SdmKXSGvaFmb60KRLOHdV__R" // ⬅️ Replace with your real site key
                 onChange={(token) => setRecaptchaToken(token)}
               />
             </div>
