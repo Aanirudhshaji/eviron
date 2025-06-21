@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { User, Mail, Building } from 'lucide-react';
+import { supabase } from '../supabaseClient';
+import ReCAPTCHA from 'react-google-recaptcha'; // ✅ added
 import '../styles/contact.css';
 
 const Contact = () => {
@@ -13,67 +15,48 @@ const Contact = () => {
   const [selectedProject, setSelectedProject] = useState('');
   const [selectedBudget, setSelectedBudget] = useState('');
   const [selectedDuration, setSelectedDuration] = useState('');
-
+  const [recaptchaToken, setRecaptchaToken] = useState(null); // ✅ added
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Clear previous error and success messages
     setError('');
     setSuccessMessage('');
 
-    // Log form data for debugging
-    console.log("Form Data:", formData);
-    console.log("Selected Project:", selectedProject);
-    console.log("Selected Budget:", selectedBudget);
-    console.log("Selected Duration:", selectedDuration);
+    if (!recaptchaToken) {
+      setError('Please complete the reCAPTCHA verification.');
+      return;
+    }
 
-    fetch('http://localhost:8000/api/contact/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        email: formData.email,
-        company: formData.company,
-        project_type: selectedProject,
-        budget: selectedBudget,
-        duration: selectedDuration,
-      }),
-    })
-      .then((res) => {
-        console.log("Response Status:", res.status);
-        if (!res.ok) {
-          throw new Error(`Failed to submit: ${res.status}`);
+    try {
+      const { error } = await supabase.from('enquiries').insert([
+        {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          company: formData.company,
+          project_types: [selectedProject],
+          budget: selectedBudget,
+          duration: selectedDuration
         }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Response Data:", data);
-        if (data.message === 'Message saved successfully!') {
-          setSuccessMessage('Message sent successfully!');
-          // Clear form fields
-          setFormData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            company: ''
-          });
-          setSelectedProject('');
-          setSelectedBudget('');
-          setSelectedDuration('');
-        } else {
-          throw new Error('Unexpected response from the server.');
-        }
-      })
-      .catch((err) => {
-        console.error("Error:", err);
+      ]);
+
+      if (error) {
+        console.error('Insert error:', error);
         setError('Something went wrong while sending the message.');
-      });
+      } else {
+        setSuccessMessage('Message sent successfully!');
+        setFormData({ firstName: '', lastName: '', email: '', company: '' });
+        setSelectedProject('');
+        setSelectedBudget('');
+        setSelectedDuration('');
+        setRecaptchaToken(null); // reset
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err);
+      setError('Unexpected error occurred.');
+    }
   };
 
   return (
@@ -82,7 +65,10 @@ const Contact = () => {
         <div className="video-section">
           <h2 className="video-heading">Let's get in touch!</h2>
           <video autoPlay loop muted>
-            <source src="https://res.cloudinary.com/dhbvmc6xe/video/upload/v1745169724/mixkit-business-people-signing-contracts-23042-hd-ready_gxzimd.mp4" type="video/mp4" />
+            <source
+              src="https://res.cloudinary.com/dhbvmc6xe/video/upload/v1745169724/mixkit-business-people-signing-contracts-23042-hd-ready_gxzimd.mp4"
+              type="video/mp4"
+            />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -90,7 +76,9 @@ const Contact = () => {
         <div className="contact-left">
           <h1 className="title">Contact Us</h1>
           <p className="description">
-          We’d love to hear from you! Whether you have questions, feedback, collaboration ideas, or just want to say hello — don’t hesitate to reach out. Fill out the form below and our team will get back to you as soon as possible. You can also connect with us through our social media channels or email.
+            We’d love to hear from you! Whether you have questions, feedback,
+            collaboration ideas, or just want to say hello — don’t hesitate to
+            reach out.
           </p>
           <div className="email-section">
             <h3>OUR EMAIL ADDRESS</h3>
@@ -120,7 +108,9 @@ const Contact = () => {
                   type="text"
                   placeholder="First Name*"
                   value={formData.firstName}
-                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, firstName: e.target.value })
+                  }
                   className="custom-input"
                   required
                 />
@@ -131,7 +121,9 @@ const Contact = () => {
                   type="text"
                   placeholder="Last Name*"
                   value={formData.lastName}
-                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, lastName: e.target.value })
+                  }
                   className="custom-input"
                   required
                 />
@@ -145,7 +137,9 @@ const Contact = () => {
                   type="email"
                   placeholder="Email Address*"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   className="custom-input"
                   required
                 />
@@ -156,7 +150,9 @@ const Contact = () => {
                   type="text"
                   placeholder="Company"
                   value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, company: e.target.value })
+                  }
                   className="custom-input"
                 />
               </div>
@@ -168,10 +164,14 @@ const Contact = () => {
                 <button
                   key={type}
                   type="button"
-                  className={`option-btn ${selectedProject === type ? 'selected' : ''}`}
+                  className={`option-btn ${
+                    selectedProject === type ? 'selected' : ''
+                  }`}
                   onClick={() => setSelectedProject(type)}
                 >
-                  {type === 'uiux' ? 'UI/UX' : type.charAt(0).toUpperCase() + type.slice(1)}
+                  {type === 'uiux'
+                    ? 'UI/UX'
+                    : type.charAt(0).toUpperCase() + type.slice(1)}
                 </button>
               ))}
             </div>
@@ -182,7 +182,9 @@ const Contact = () => {
                 <button
                   key={budget}
                   type="button"
-                  className={`option-btn ${selectedBudget === budget ? 'selected' : ''}`}
+                  className={`option-btn ${
+                    selectedBudget === budget ? 'selected' : ''
+                  }`}
                   onClick={() => setSelectedBudget(budget)}
                 >
                   {budget}
@@ -196,7 +198,9 @@ const Contact = () => {
                 <button
                   key={duration}
                   type="button"
-                  className={`option-btn ${selectedDuration === duration ? 'selected' : ''}`}
+                  className={`option-btn ${
+                    selectedDuration === duration ? 'selected' : ''
+                  }`}
                   onClick={() => setSelectedDuration(duration)}
                 >
                   {duration}
@@ -204,7 +208,17 @@ const Contact = () => {
               ))}
             </div>
 
-            <button type="submit" className="submit-btn">Send Enquiry</button>
+            {/* ✅ reCAPTCHA here */}
+            <div style={{ margin: '20px 0' }}>
+              <ReCAPTCHA
+                sitekey="6LeHeWgrAAAAAE7gZ7n4swbprEVydEUOz0Nsxsag" // ⬅️ Replace with your real site key
+                onChange={(token) => setRecaptchaToken(token)}
+              />
+            </div>
+
+            <button type="submit" className="submit-btn">
+              Send Enquiry
+            </button>
           </form>
         </div>
       </div>
